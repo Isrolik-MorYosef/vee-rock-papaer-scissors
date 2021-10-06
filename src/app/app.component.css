@@ -1,0 +1,101 @@
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.step-one {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: auto;
+  justify-content: center;
+}
+
+.option {
+  margin: 25px;
+}
+
+@media screen and (max-width: 700px) {
+  .bg-triangle {
+    left: 5%;
+    bottom: 271px;
+    transform: scale(0.8);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .option {
+    margin: 8px
+  }
+}
+
+.option:nth-child(3n) {
+  display: flex;
+  justify-content: center;
+  flex-basis: 100%;
+}
+
+.bg-triangle {
+  position: relative;
+  left: 210px;
+  bottom: 300px;
+  z-index: -1;
+}
+
+.step-two {
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-two div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.circle-black {
+  height: 200px;
+  width: 200px;
+  background-color: rgba(78, 78, 78, 0.48);
+  border-radius: 50%;
+  margin-top: 20px;
+}
+
+.res {
+  margin: 35px 0;
+  display: flex;
+  justify-content: center;
+  transform: scale(1.5);
+}
+
+.replay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 25px;
+}
+
+.txt {
+  font-size: 50px;
+}
+
+.winner {
+  border-radius: 50%;
+  box-shadow: rgba(255, 255, 255, 0.06) 0px 0px 0px 25px,
+  rgba(255, 255, 255, 0.03) 0px 0px 0px 50px,
+  rgba(255, 255, 255, 0.01) 0px 0px 0px 75px
+}
+
+.play-again-btn {
+  padding: 10px 40px;
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  color: #ff3e3e;
+  background: #f1f1f1;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}

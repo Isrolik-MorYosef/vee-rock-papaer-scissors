@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 2.5px solid hsl(217, 16%, 45%);
+  border-radius: 5px;
+  margin-bottom: 50px;
+  width: 700px;
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    width: 100%;
+  }
+}
