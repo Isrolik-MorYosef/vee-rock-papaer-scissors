@@ -23,4 +23,7 @@
                      [type]="homeSelected"></app-option-game>
     <div *ngIf="!(ready$ | async)" class="circle-black"></div>
   </div>
+  <div class="rule">
+    <button (click)="openDialog()">RULES</button>
+  </div>
 </div>

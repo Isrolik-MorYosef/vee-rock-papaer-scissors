@@ -12,6 +12,8 @@ import {DataService} from "./services/data.service";
 import {Result} from "./types/result.interface";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {debounceTime, take} from "rxjs/operators";
+import {MatDialog} from "@angular/material/dialog";
+import {RulesDialogComponent} from "./components/rules-dialog/rules-dialog.component";
 
 @Component({
   selector: 'app-root',
@@ -28,8 +30,18 @@ export class AppComponent {
   // @ts-ignore
   ready$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService,
+              public dialog: MatDialog) {
   }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(RulesDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
 
   public get gameEnum(): typeof GameOptionEnum {
     return GameOptionEnum;

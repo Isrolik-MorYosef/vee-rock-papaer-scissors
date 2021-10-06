@@ -5,23 +5,23 @@
   width: 100px;
   height: 100px;
   background: #d7d7d7;
-  border: 20px solid ;
+  border: 18px solid ;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .paper {
   border-color: hsl(230, 89%, 65%);
-  box-shadow: inset 0px 7px #92929245, 0px 7px hsl(230, 89%, 62%);
+  box-shadow: inset 0px 7px #92929245, 0px 5px hsl(230, 73%, 44%);
 }
 
 .rock {
   border-color: hsl(349, 70%, 56%);
-  box-shadow: inset 0px 7px #92929245, 0px 7px hsl(349, 71%, 52%);
+  box-shadow: inset 0px 7px #92929245, 0px 5px hsl(349, 81%, 42%);
 }
 
 .scissors {
   border-color: hsl(40, 84%, 53%);
-  box-shadow: inset 0px 7px #92929245, 0px 7px hsl(39, 89%, 49%) ;
+  box-shadow: inset 0px 7px #92929245, 0px 5px hsl(39, 91%, 39%) ;
 }
 

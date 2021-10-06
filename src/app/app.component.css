@@ -4,7 +4,6 @@
 }
 
 .step-one {
-  position: static;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -16,7 +15,7 @@
   margin: 25px;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
   .bg-triangle {
     left: 5%;
     bottom: 271px;
@@ -24,7 +23,7 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
   .option {
     margin: 8px
   }
@@ -38,14 +37,15 @@
 
 .bg-triangle {
   position: relative;
-  left: 210px;
+  left: calc(50% - 153px);
   bottom: 300px;
   z-index: -1;
 }
 
 .step-two {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding: 0 20%;
 }
 
 .step-two div {
@@ -97,5 +97,11 @@
   color: #ff3e3e;
   background: #f1f1f1;
   cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
+}
+
+.rule {
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }
