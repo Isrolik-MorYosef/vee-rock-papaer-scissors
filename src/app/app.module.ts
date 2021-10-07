@@ -7,6 +7,9 @@ import {ScoreComponent} from './components/score/score.component';
 import {OptionGameComponent} from './components/option-game/option-game.component';
 import {CommonModule} from "@angular/common";
 import {RulesDialogComponent} from './components/rules-dialog/rules-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatButtonModule} from "@angular/material/button";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import {RulesDialogComponent} from './components/rules-dialog/rules-dialog.compo
   ],
   imports: [
     BrowserModule,
-    CommonModule
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

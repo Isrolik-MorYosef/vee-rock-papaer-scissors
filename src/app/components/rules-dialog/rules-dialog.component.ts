@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-rules-dialog',
   templateUrl: './rules-dialog.component.html',
   styleUrls: ['./rules-dialog.component.css']
 })
-export class RulesDialogComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class RulesDialogComponent {
+  constructor(public dialogRef: MatDialogRef<any>) { }
 }

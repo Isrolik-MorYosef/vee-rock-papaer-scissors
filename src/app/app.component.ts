@@ -12,7 +12,7 @@ import {DataService} from "./services/data.service";
 import {Result} from "./types/result.interface";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {debounceTime, take} from "rxjs/operators";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {RulesDialogComponent} from "./components/rules-dialog/rules-dialog.component";
 
 @Component({
@@ -28,20 +28,30 @@ export class AppComponent {
   // @ts-ignore
   result: Result;
   // @ts-ignore
-  ready$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  stepsOfGame$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  // @ts-ignore
+  dialogRef: MatDialogRef<RulesDialogComponent> | null;
 
   constructor(private dataService: DataService,
               public dialog: MatDialog) {
+
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(RulesDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    if (this.dialogRef == null) {
+      this.dialogRef = this.dialog.open(
+        RulesDialogComponent,
+        {
+          disableClose: true,
+          hasBackdrop: true,
+          backdropClass: 'bdrop'
+        }
+      );
+    }
+    this.dialogRef.afterClosed().subscribe(result => {
+      this.dialogRef = null;
     });
   }
-
 
   public get gameEnum(): typeof GameOptionEnum {
     return GameOptionEnum;
@@ -51,13 +61,13 @@ export class AppComponent {
     this.userSelected = option;
     this.getRandomValue();
     this.result = this.dataService.calculateResultGame(this.userSelected, this.homeSelected);
-    if(this.result.userWinner !== null) {
+    if (this.result.userWinner !== null) {
       this.dataService.updateScore(this.result.userWinner);
     }
   }
 
   getRandomValue(): any {
-    this.ready$.next(true);
+    this.stepsOfGame$.next(1);
     var rand = Math.floor(Math.random() * Object.keys(this.gameEnum).length);
     this.homeSelected = Object.values(this.gameEnum)[rand];
   }

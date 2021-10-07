@@ -3,7 +3,7 @@
   justify-content: center;
 }
 
-.step-one {
+.options {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -84,9 +84,9 @@
 
 .winner {
   border-radius: 50%;
-  box-shadow: rgba(255, 255, 255, 0.06) 0px 0px 0px 25px,
-  rgba(255, 255, 255, 0.03) 0px 0px 0px 50px,
-  rgba(255, 255, 255, 0.01) 0px 0px 0px 75px
+  box-shadow: rgba(255, 255, 255, 0.03) 0px 0px 0px 40px,
+  rgba(255, 255, 255, 0.02) 0px 0px 0px 80px,
+  rgba(255, 255, 255, 0.01) 0px 0px 0px 120px
 }
 
 .play-again-btn {
@@ -100,8 +100,17 @@
   box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
 }
 
-.rule {
+.rule-btn {
   position: fixed;
-  bottom: 0;
-  right: 0;
+  bottom: 15px;
+  right: 15px;
+  background: none;
+  border: 1.5px solid white;
+  border-radius: 5px;
+  padding: 5px 25px;
+  font-size: larger;
+  color: white;
+  cursor: pointer;
 }
+
+

@@ -5,4 +5,6 @@ body{
   font-family: 'Barlow Semi Condensed', sans-serif;
 }
 
-
+.bdrop {
+  backdrop-filter: blur(2px);
+}

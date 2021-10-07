@@ -1,6 +1,6 @@
 <app-header class="header"></app-header>
 <div *ngIf="!userSelected">
-  <div class="step-one">
+  <div class="options">
     <app-option-game class="option" (click)="setSelectedUser('PAPER')" [type]="gameEnum.PAPER"></app-option-game>
     <app-option-game class="option" (click)="setSelectedUser('SCISSORS')" [type]="gameEnum.SCISSORS"></app-option-game>
     <app-option-game class="option" (click)="setSelectedUser('ROCK')" [type]="gameEnum.ROCK"></app-option-game>
@@ -10,20 +10,20 @@
 <div *ngIf="userSelected" class="step-two">
   <div>
     <p>YOUR PICKED:</p>
-    <app-option-game [ngClass]="{'winner': result.userWinner}" class="res"
+    <app-option-game [ngClass]="{'winner': result?.userWinner}" class="res"
                      [type]="userSelected"></app-option-game>
   </div>
-  <div class="replay" *ngIf="homeSelected">
+  <div class="replay">
     <div class="txt">{{result.textResult}}</div>
     <button class="play-again-btn" (click)="playAgain()">PLAY AGAIN</button>
   </div>
   <div>
     <p>THE HOUSE PICKED:</p>
-    <app-option-game [ngClass]="{'winner': result.userWinner === false}" class="res"
+    <app-option-game [ngClass]="{'winner': result?.userWinner === false}" class="res"
                      [type]="homeSelected"></app-option-game>
-    <div *ngIf="!(ready$ | async)" class="circle-black"></div>
+    <div *ngIf="stepsOfGame$.getValue() === 5" class="circle-black"></div>
   </div>
-  <div class="rule">
-    <button (click)="openDialog()">RULES</button>
-  </div>
+</div>
+<div class="rule-btn" (click)="openDialog()">
+  <span>RULES</span>
 </div>

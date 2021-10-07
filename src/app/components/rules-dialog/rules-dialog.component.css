@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h2.remove-whitespace {
+  margin: 0;
+}
+
+.header img {
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+}

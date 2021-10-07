@@ -3,14 +3,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white;
+  background: #eeeeee;
   border-radius: 5px;
   padding: 3px 10px;
 }
+
 .score-txt {
   font-size: 20px;
   color: hsl(229, 64%, 46%);
 }
+
 .score {
   color: hsl(229, 25%, 31%);
   font-size: 50px;

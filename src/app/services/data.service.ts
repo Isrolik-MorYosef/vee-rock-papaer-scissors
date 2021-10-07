@@ -8,27 +8,24 @@ import {Result} from "../types/result.interface";
 export class DataService {
   score: number = 0;
 
-  constructor() {
-  }
-
-  calculateResultGame(userSelected: any, homeSelected: any): Result {
+  calculateResultGame(userSelection: any, homeSelection: any): Result {
     let result: Result = {textResult: '', userWinner: null};
-    if (userSelected === homeSelected) {
+    if (userSelection === homeSelection) {
       result.textResult = 'TIE';
-    } else if (userSelected === GameOptionEnum.PAPER) {
-      if (homeSelected === GameOptionEnum.SCISSORS) {
+    } else if (userSelection === GameOptionEnum.PAPER) {
+      if (homeSelection === GameOptionEnum.SCISSORS) {
         result.textResult = 'YOU LOSE';
       } else {
         result.textResult = 'YOU WIN'
       }
-    } else if (userSelected === GameOptionEnum.ROCK) {
-      if (homeSelected === GameOptionEnum.PAPER) {
+    } else if (userSelection === GameOptionEnum.ROCK) {
+      if (homeSelection === GameOptionEnum.PAPER) {
         result.textResult = 'YOU LOSE';
       } else {
         result.textResult = 'YOU WIN'
       }
-    } else if (userSelected === GameOptionEnum.SCISSORS) {
-      if (homeSelected === GameOptionEnum.ROCK) {
+    } else if (userSelection === GameOptionEnum.SCISSORS) {
+      if (homeSelection === GameOptionEnum.ROCK) {
         result.textResult = 'YOU LOSE';
       } else {
         result.textResult = 'YOU WIN'

@@ -6,18 +6,10 @@ import {GameOptionEnum} from "../../types/game-option.enum";
   templateUrl: './option-game.component.html',
   styleUrls: ['./option-game.component.css']
 })
-export class OptionGameComponent implements OnInit {
-  // @ts-ignore
+export class OptionGameComponent {
   @Input() type: any;
-  // @ts-ignore
-  constructor() { }
 
-  // @ts-ignore
   public get gameEnum(): typeof GameOptionEnum {
     return GameOptionEnum;
   }
-
-  ngOnInit(): void {
-  }
-
 }
