@@ -38,29 +38,22 @@
 .bg-triangle {
   position: relative;
   left: calc(50% - 153px);
-  bottom: 300px;
+  bottom: 325px;
   z-index: -1;
 }
 
-.step-two {
+.page-two {
   display: flex;
   justify-content: space-around;
   padding: 0 20%;
 }
 
-.step-two div {
+.page-two div {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
-}
-
-.circle-black {
-  height: 200px;
-  width: 200px;
-  background-color: rgba(78, 78, 78, 0.48);
-  border-radius: 50%;
-  margin-top: 20px;
+  transition: scale 3s ease-in-out;
 }
 
 .res {
@@ -80,13 +73,6 @@
 
 .txt {
   font-size: 50px;
-}
-
-.winner {
-  border-radius: 50%;
-  box-shadow: rgba(255, 255, 255, 0.03) 0px 0px 0px 40px,
-  rgba(255, 255, 255, 0.02) 0px 0px 0px 80px,
-  rgba(255, 255, 255, 0.01) 0px 0px 0px 120px
 }
 
 .play-again-btn {
@@ -112,5 +98,3 @@
   color: white;
   cursor: pointer;
 }
-
-

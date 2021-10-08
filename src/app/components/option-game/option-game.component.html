@@ -1,9 +1,12 @@
-<div *ngIf="gameEnum.PAPER == type" class="circle paper">
+<div *ngIf="gameEnum.PAPER == type" [@fadeInOut] class="circle paper">
   <img src="assets/images/icon-paper.svg">
 </div>
-<div *ngIf="gameEnum.SCISSORS === type" class="circle scissors">
+<div *ngIf="gameEnum.SCISSORS === type" [@fadeInOut] class="circle scissors">
   <img src="assets/images/icon-scissors.svg">
 </div>
-<div *ngIf="gameEnum.ROCK === type" class="circle rock">
+<div *ngIf="gameEnum.ROCK === type" [@fadeInOut] class="circle rock">
   <img src="assets/images/icon-rock.svg">
 </div>
+<div *ngIf="type === 'loading'" [@fadeInOut] class="circle loading"></div>
+<div [ngClass]="{'winner': win}"></div>
+

@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from "../../services/data.service";
+import {AppService} from "../../services/app.service";
+import {Animations} from "../../animations/animations";
 
 @Component({
   selector: 'app-score',
   templateUrl: './score.component.html',
-  styleUrls: ['./score.component.css']
+  styleUrls: ['./score.component.css'],
+  animations: [Animations.fadeInOut]
+
 })
 export class ScoreComponent {
-  constructor(private dataService: DataService) { }
+  constructor(private appService: AppService) { }
 
   getScore(): string {
-    return this.dataService.getScore();
+    return this.appService.getScore();
   }
 }

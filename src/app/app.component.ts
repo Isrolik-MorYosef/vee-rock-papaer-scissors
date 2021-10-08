@@ -1,39 +1,40 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  Pipe,
-  PipeTransform
+  ChangeDetectionStrategy, ChangeDetectorRef, Component,
 } from '@angular/core';
 import {GameOptionEnum} from "./types/game-option.enum";
-import {DataService} from "./services/data.service";
+import {AppService} from "./services/app.service";
 import {Result} from "./types/result.interface";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {debounceTime, take} from "rxjs/operators";
+import {BehaviorSubject, Observable} from "rxjs";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {RulesDialogComponent} from "./components/rules-dialog/rules-dialog.component";
+import {style, animate, transition, trigger} from '@angular/animations';
+import {Animations} from "./animations/animations";
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  animations: [
+    Animations.animeTrigger
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class AppComponent {
   // @ts-ignore
-  userSelected: any = null;
-  homeSelected: any = null;
+  userSelection: string;
+  // @ts-ignore
+  homeSelection: string;
   // @ts-ignore
   result: Result;
   // @ts-ignore
-  stepsOfGame$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  // @ts-ignore
   dialogRef: MatDialogRef<RulesDialogComponent> | null;
+  completeGame: boolean = false;
 
-  constructor(private dataService: DataService,
-              public dialog: MatDialog) {
+  constructor(public appService: AppService,
+              public dialog: MatDialog,
+              public cd: ChangeDetectorRef) {
 
   }
 
@@ -48,7 +49,7 @@ export class AppComponent {
         }
       );
     }
-    this.dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef.afterClosed().subscribe(() => {
       this.dialogRef = null;
     });
   }
@@ -57,23 +58,40 @@ export class AppComponent {
     return GameOptionEnum;
   }
 
-  setSelectedUser(option: string) {
-    this.userSelected = option;
-    this.getRandomValue();
-    this.result = this.dataService.calculateResultGame(this.userSelected, this.homeSelected);
+  async start(userSelection: string) {
+    this.userSelection = userSelection;
+    await this.sleep(800);
+    this.homeSelection = this.getRandomValue();
+    await this.sleep(800);
+    this.calcResult();
+    await this.sleep(800);
+    this.completeGame = true;
+    this.cd.detectChanges();
+  }
+
+  getRandomValue(): string {
+    const rand = Math.floor(Math.random() * Object.keys(this.gameEnum).length);
+    return Object.values(this.gameEnum)[rand];
+  }
+
+  sleep(ms: number): Promise<any> {
+    const promise: Promise<any> = new Promise(resolve => setTimeout(resolve, ms));
+    this.cd.detectChanges();
+    return promise
+  }
+
+  calcResult(): void {
+    this.result = this.appService.calculateResultGame(this.userSelection, this.homeSelection);
     if (this.result.userWinner !== null) {
-      this.dataService.updateScore(this.result.userWinner);
+      this.appService.updateScore(this.result.userWinner);
     }
   }
 
-  getRandomValue(): any {
-    this.stepsOfGame$.next(1);
-    var rand = Math.floor(Math.random() * Object.keys(this.gameEnum).length);
-    this.homeSelected = Object.values(this.gameEnum)[rand];
+  playAgain() {
+    this.homeSelection = '';
+    this.userSelection = '';
+    this.result = {userWinner: null, textResult: ''};
+    this.completeGame = false;
   }
 
-  playAgain() {
-    this.homeSelected = null;
-    this.userSelected = null;
-  }
 }

@@ -1,27 +1,28 @@
 <app-header class="header"></app-header>
-<div *ngIf="!userSelected">
+<div *ngIf="!userSelection">
   <div class="options">
-    <app-option-game class="option" (click)="setSelectedUser('PAPER')" [type]="gameEnum.PAPER"></app-option-game>
-    <app-option-game class="option" (click)="setSelectedUser('SCISSORS')" [type]="gameEnum.SCISSORS"></app-option-game>
-    <app-option-game class="option" (click)="setSelectedUser('ROCK')" [type]="gameEnum.ROCK"></app-option-game>
+    <app-option-game class="option" (click)="start('PAPER')" [type]="gameEnum.PAPER"></app-option-game>
+    <app-option-game class="option" (click)="start('SCISSORS')" [type]="gameEnum.SCISSORS"></app-option-game>
+    <app-option-game class="option" (click)="start('ROCK')" [type]="gameEnum.ROCK"></app-option-game>
   </div>
   <img class="bg-triangle" src="assets/images/bg-triangle.svg">
 </div>
-<div *ngIf="userSelected" class="step-two">
+<div *ngIf="userSelection" class="page-two">
   <div>
-    <p>YOUR PICKED:</p>
-    <app-option-game [ngClass]="{'winner': result?.userWinner}" class="res"
-                     [type]="userSelected"></app-option-game>
+    <p>YOUR PICKED</p>
+      <app-option-game [win]="result?.userWinner && completeGame" class="res"
+                       [type]="userSelection"></app-option-game>
   </div>
-  <div class="replay">
-    <div class="txt">{{result.textResult}}</div>
+  <div *ngIf="completeGame" [@animeTrigger] class="replay">
+    <div class="txt">{{result?.textResult}}</div>
     <button class="play-again-btn" (click)="playAgain()">PLAY AGAIN</button>
   </div>
   <div>
-    <p>THE HOUSE PICKED:</p>
-    <app-option-game [ngClass]="{'winner': result?.userWinner === false}" class="res"
-                     [type]="homeSelected"></app-option-game>
-    <div *ngIf="stepsOfGame$.getValue() === 5" class="circle-black"></div>
+    <p>THE HOUSE PICKED</p>
+    <app-option-game *ngIf="homeSelection" [win]="result?.userWinner === false && completeGame" class="res"
+                     [type]="homeSelection"></app-option-game>
+    <app-option-game *ngIf="!homeSelection" class="res"
+                     [type]="'loading'"></app-option-game>
   </div>
 </div>
 <div class="rule-btn" (click)="openDialog()">

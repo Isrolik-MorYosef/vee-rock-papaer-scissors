@@ -6,6 +6,7 @@
   background: #eeeeee;
   border-radius: 5px;
   padding: 3px 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
 }
 
 .score-txt {

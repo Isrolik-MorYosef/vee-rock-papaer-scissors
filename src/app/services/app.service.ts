@@ -5,7 +5,7 @@ import {Result} from "../types/result.interface";
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class AppService {
   score: number = 0;
 
   calculateResultGame(userSelection: any, homeSelection: any): Result {
