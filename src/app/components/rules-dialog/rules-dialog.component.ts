@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-rules-dialog',
@@ -7,5 +6,4 @@ import {MatDialogRef} from "@angular/material/dialog";
   styleUrls: ['./rules-dialog.component.css']
 })
 export class RulesDialogComponent {
-  constructor(public dialogRef: MatDialogRef<any>) { }
 }

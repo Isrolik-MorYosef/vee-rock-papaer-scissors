@@ -15,20 +15,6 @@
   margin: 25px;
 }
 
-@media screen and (max-width: 600px) {
-  .bg-triangle {
-    left: 5%;
-    bottom: 271px;
-    transform: scale(0.8);
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .option {
-    margin: 8px
-  }
-}
-
 .option:nth-child(3n) {
   display: flex;
   justify-content: center;
@@ -38,25 +24,28 @@
 .bg-triangle {
   position: relative;
   left: calc(50% - 153px);
-  bottom: 325px;
+  bottom: 300px;
+  transform: scale(0.9);
   z-index: -1;
 }
 
-.page-two {
+.step-two {
   display: flex;
   justify-content: space-around;
   padding: 0 20%;
 }
 
-.page-two div {
+.step-two div {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
+  white-space: nowrap;
+  margin: 0 10px;
   transition: scale 3s ease-in-out;
 }
 
-.res {
+.result-game {
   margin: 35px 0;
   display: flex;
   justify-content: center;
@@ -97,4 +86,35 @@
   font-size: larger;
   color: white;
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .bg-triangle {
+    transform: scale(0.7);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .option {
+    margin: 8px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .replay {
+    position: fixed;
+    bottom: 15%
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .result-game {
+    transform: scale(1.2);
+  }
+}
+
+@media screen and (max-width: 333px) {
+  .bg-triangle {
+    display: none;
+  }
 }

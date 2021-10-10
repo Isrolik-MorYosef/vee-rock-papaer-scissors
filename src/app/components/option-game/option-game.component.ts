@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {GameOptionEnum} from "../../types/game-option.enum";
 import {Animations} from "../../animations/animations";
 

@@ -1,3 +1,9 @@
+.container-rules {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -12,5 +18,41 @@ h2.remove-whitespace {
 .header img {
   height: 15px;
   width: 15px;
+  padding: 7px;
   cursor: pointer;
 }
+
+.header img:hover{
+  background-color: #d7d7d7;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out ;
+}
+
+.nowrap {
+  white-space: nowrap !important;
+}
+
+.rule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .header img {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: fixed;
+    bottom: 5%;
+  }
+}
+
+
+

@@ -1,46 +1,38 @@
-import {
-  ChangeDetectionStrategy, ChangeDetectorRef, Component,
-} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component,} from '@angular/core';
 import {GameOptionEnum} from "./types/game-option.enum";
 import {AppService} from "./services/app.service";
 import {Result} from "./types/result.interface";
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {RulesDialogComponent} from "./components/rules-dialog/rules-dialog.component";
-import {style, animate, transition, trigger} from '@angular/animations';
 import {Animations} from "./animations/animations";
-
+import {BreakpointObserver, Breakpoints, BreakpointState} from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [
-    Animations.animeTrigger
-  ],
+  animations: [Animations.animeTrigger],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class AppComponent {
-  // @ts-ignore
   userSelection: string;
-  // @ts-ignore
-  homeSelection: string;
-  // @ts-ignore
+  houseSelection: string;
   result: Result;
-  // @ts-ignore
-  dialogRef: MatDialogRef<RulesDialogComponent> | null;
   completeGame: boolean = false;
+  isExtraSmall: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.XSmall);
 
   constructor(public appService: AppService,
               public dialog: MatDialog,
-              public cd: ChangeDetectorRef) {
-
+              public changeDetectorRef: ChangeDetectorRef,
+              public breakpointObserver: BreakpointObserver) {
   }
 
-  openDialog() {
-    if (this.dialogRef == null) {
-      this.dialogRef = this.dialog.open(
+  openDialog(): void {
+    let dialogRef: MatDialogRef<RulesDialogComponent> | null = null;
+    if (dialogRef == null) {
+      dialogRef = this.dialog.open(
         RulesDialogComponent,
         {
           disableClose: true,
@@ -49,8 +41,15 @@ export class AppComponent {
         }
       );
     }
-    this.dialogRef.afterClosed().subscribe(() => {
-      this.dialogRef = null;
+    dialogRef.afterClosed().subscribe(() => {
+      dialogRef = null;
+      smallDialogSubscription.unsubscribe();
+    });
+
+    const smallDialogSubscription = this.isExtraSmall.subscribe(result => {
+      result.matches ?
+        dialogRef?.addPanelClass('full-screen-modal') :
+        dialogRef?.removePanelClass('full-screen-modal')
     });
   }
 
@@ -61,37 +60,37 @@ export class AppComponent {
   async start(userSelection: string) {
     this.userSelection = userSelection;
     await this.sleep(800);
-    this.homeSelection = this.getRandomValue();
+    this.houseSelection = this.getRandomValue();
     await this.sleep(800);
     this.calcResult();
     await this.sleep(800);
     this.completeGame = true;
-    this.cd.detectChanges();
+    this.changeDetectorRef.detectChanges();
   }
+
+  sleep(ms: number): Promise<any> {
+    const promise: Promise<any> = new Promise(resolve => setTimeout(resolve, ms));
+    this.changeDetectorRef.detectChanges();
+    return promise
+  }
+
 
   getRandomValue(): string {
     const rand = Math.floor(Math.random() * Object.keys(this.gameEnum).length);
     return Object.values(this.gameEnum)[rand];
   }
 
-  sleep(ms: number): Promise<any> {
-    const promise: Promise<any> = new Promise(resolve => setTimeout(resolve, ms));
-    this.cd.detectChanges();
-    return promise
-  }
-
   calcResult(): void {
-    this.result = this.appService.calculateResultGame(this.userSelection, this.homeSelection);
-    if (this.result.userWinner !== null) {
-      this.appService.updateScore(this.result.userWinner);
+    this.result = this.appService.calculateResultGame(this.userSelection, this.houseSelection);
+    if (this.result.isUserWinner !== undefined) {
+      this.appService.updateScore(this.result.isUserWinner);
     }
   }
 
-  playAgain() {
-    this.homeSelection = '';
+  playAgain(): void {
+    this.houseSelection = '';
     this.userSelection = '';
-    this.result = {userWinner: null, textResult: ''};
+    this.result = {textResult: ''};
     this.completeGame = false;
   }
-
 }

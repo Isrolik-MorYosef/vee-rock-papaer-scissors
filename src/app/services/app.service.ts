@@ -6,32 +6,35 @@ import {Result} from "../types/result.interface";
   providedIn: 'root'
 })
 export class AppService {
-  score: number = 0;
+  score: number;
 
-  calculateResultGame(userSelection: any, homeSelection: any): Result {
-    let result: Result = {textResult: '', userWinner: null};
-    if (userSelection === homeSelection) {
+  calculateResultGame(userSelection: string, houseSelection: string): Result {
+    let result: Result = {textResult: ''};
+    if (userSelection === houseSelection) {
       result.textResult = 'TIE';
+      result.isTie = true;
     } else if (userSelection === GameOptionEnum.PAPER) {
-      if (homeSelection === GameOptionEnum.SCISSORS) {
+      if (houseSelection === GameOptionEnum.SCISSORS) {
         result.textResult = 'YOU LOSE';
       } else {
-        result.textResult = 'YOU WIN'
+        result.textResult = 'YOU WIN';
       }
     } else if (userSelection === GameOptionEnum.ROCK) {
-      if (homeSelection === GameOptionEnum.PAPER) {
+      if (houseSelection === GameOptionEnum.PAPER) {
         result.textResult = 'YOU LOSE';
       } else {
-        result.textResult = 'YOU WIN'
+        result.textResult = 'YOU WIN';
       }
     } else if (userSelection === GameOptionEnum.SCISSORS) {
-      if (homeSelection === GameOptionEnum.ROCK) {
+      if (houseSelection === GameOptionEnum.ROCK) {
         result.textResult = 'YOU LOSE';
       } else {
-        result.textResult = 'YOU WIN'
+        result.textResult = 'YOU WIN';
       }
     }
-    result.userWinner = result.textResult === 'TIE' ? null : result.textResult === 'YOU WIN'
+    if(!result.isTie) {
+      result.isUserWinner = result.textResult === 'YOU WIN';
+    }
     return result;
   }
 
@@ -39,7 +42,7 @@ export class AppService {
     if (sessionStorage.getItem('SCORE') === null) {
       sessionStorage.setItem('SCORE', '0')
     }
-    return <string>sessionStorage.getItem('SCORE');
+    return String(sessionStorage.getItem('SCORE'));
   }
 
   updateScore(win: boolean): void {

@@ -5,23 +5,23 @@
     <app-option-game class="option" (click)="start('SCISSORS')" [type]="gameEnum.SCISSORS"></app-option-game>
     <app-option-game class="option" (click)="start('ROCK')" [type]="gameEnum.ROCK"></app-option-game>
   </div>
-  <img class="bg-triangle" src="assets/images/bg-triangle.svg">
+  <img class="bg-triangle" src="assets/images/bg-triangle.svg" alt="loading">
 </div>
-<div *ngIf="userSelection" class="page-two">
+<div *ngIf="userSelection" class="step-two">
   <div>
-    <p>YOUR PICKED</p>
-      <app-option-game [win]="result?.userWinner && completeGame" class="res"
-                       [type]="userSelection"></app-option-game>
+    <h4 class="nowrap"> YOUR PICKED </h4>
+    <app-option-game [win]="result?.isUserWinner && completeGame" class="result-game"
+                     [type]="userSelection"></app-option-game>
   </div>
   <div *ngIf="completeGame" [@animeTrigger] class="replay">
     <div class="txt">{{result?.textResult}}</div>
     <button class="play-again-btn" (click)="playAgain()">PLAY AGAIN</button>
   </div>
   <div>
-    <p>THE HOUSE PICKED</p>
-    <app-option-game *ngIf="homeSelection" [win]="result?.userWinner === false && completeGame" class="res"
-                     [type]="homeSelection"></app-option-game>
-    <app-option-game *ngIf="!homeSelection" class="res"
+    <h4 class="nowrap"> THE HOUSE PICKED </h4>
+    <app-option-game *ngIf="houseSelection" [win]="result?.isUserWinner === false && completeGame" class="result-game"
+                     [type]="houseSelection"></app-option-game>
+    <app-option-game *ngIf="!houseSelection" class="result-game"
                      [type]="'loading'"></app-option-game>
   </div>
 </div>

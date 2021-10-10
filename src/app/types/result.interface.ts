@@ -1,4 +1,5 @@
 export interface Result {
-  userWinner: boolean | null ;
+  isUserWinner?: boolean;
+  isTie? : boolean;
   textResult: string;
 }
